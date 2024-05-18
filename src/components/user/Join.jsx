@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Row, Col, Form, InputGroup, Card, Button } from "react-bootstrap";
 import { app } from "../../firebaseInit";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Join = () => {
   const navi = useNavigate();
   const [loading, setLoading] = useState(false);
   const auth = getAuth(app);
@@ -26,19 +26,12 @@ const Login = () => {
     if (email === "" || pass === "") {
       alert("이메일 또는 비밀번호를 입력하세요!");
     } else {
-      //로그인 체크
       setLoading(true);
-      signInWithEmailAndPassword(auth, email, pass)
+      createUserWithEmailAndPassword(auth, email, pass)
         .then((success) => {
-          alert("로그인 성공");
+          alert("이메일 가입 성공");
           setLoading(false);
-          sessionStorage.setItem("email", email);
-          sessionStorage.setItem("uid", success.user.uid);
-          if (sessionStorage.getItem("target")) {
-            navi(sessionStorage.getItem("target"));
-          } else {
-            navi("/");
-          }
+          navi("/login");
         })
         .catch((error) => {
           alert("에러: " + error.message);
@@ -53,7 +46,7 @@ const Login = () => {
       <Col md={6} lg={4}>
         <Card>
           <Card.Header>
-            <h3 className="text-center">로그인</h3>
+            <h3 className="text-center">회원가입</h3>
           </Card.Header>
           <Card.Body>
             <form onSubmit={onSubmit}>
@@ -64,7 +57,12 @@ const Login = () => {
                 >
                   이메일
                 </InputGroup.Text>
-                <Form.Control name="email" value={email} onChange={onChange} />
+                <Form.Control
+                  name="email"
+                  value={email}
+                  placeholder="이메일을 입력해주세요."
+                  onChange={onChange}
+                />
               </InputGroup>
               <InputGroup className="mb-2">
                 <InputGroup.Text
@@ -76,17 +74,15 @@ const Login = () => {
                 <Form.Control
                   name="pass"
                   type="password"
+                  placeholder="패스워드를 입력해주세요."
                   value={pass}
                   onChange={onChange}
                 />
               </InputGroup>
               <div>
                 <Button className="w-100" type="submit">
-                  로그인
+                  회원가입
                 </Button>
-              </div>
-              <div className="text-end">
-                <a href="/join">회원가입</a>
               </div>
             </form>
           </Card.Body>
@@ -96,4 +92,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Join;
