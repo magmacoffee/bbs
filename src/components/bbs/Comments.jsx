@@ -205,7 +205,7 @@ const Comments = () => {
             ) : (
               <div
                 className={com.ellip && "ellipsis"}
-                style={{ whiteSpace: "pre-wrap" }}
+                style={{ whiteSpace: "pre-wrap", cursor: "pointer" }}
                 onClick={() => onClickContents(com.id)}
               >
                 {com.contents}
