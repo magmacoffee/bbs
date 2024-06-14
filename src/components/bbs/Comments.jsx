@@ -24,6 +24,7 @@ const Comments = () => {
   const { id } = useParams();
 
   const callAPI = () => {
+    console.log(id);
     const q = query(
       collection(db, "comments"),
       where("pid", "==", id),
@@ -47,6 +48,7 @@ const Comments = () => {
             originContents: row.contents,
           }
       );
+      console.log(data);
       setComments(data);
     });
   };
@@ -80,8 +82,8 @@ const Comments = () => {
       date: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
     };
     await addDoc(collection(db, "comments"), data);
-    alert("댓글이 등록되었습니다.");
     setContents("");
+    alert("댓글이 등록되었습니다.");
   };
 
   const onClickUpdate = (id) => {
@@ -124,7 +126,7 @@ const Comments = () => {
   }, []);
 
   return (
-    <div className="my-5">
+    <div>
       {!email ? (
         <div className="text-end">
           <Button className="px-6" onClick={onClickLogin}>
@@ -211,7 +213,6 @@ const Comments = () => {
                 {com.contents}
               </div>
             )}
-
             <hr />
           </div>
         ))}

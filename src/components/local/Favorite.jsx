@@ -56,7 +56,9 @@ const Favorite = () => {
               <td>{local.road_address_name}</td>
               <td>{local.phone}</td>
               <td>
-                <Button onClick={() => onClickDelete(local)}>취소</Button>
+                <Button variant="danger" onClick={() => onClickDelete(local)}>
+                  취소
+                </Button>
               </td>
             </tr>
           ))}

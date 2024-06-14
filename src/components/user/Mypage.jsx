@@ -30,10 +30,10 @@ const Mypage = () => {
     }
     // 정보 저장
     if (!window.confirm("변경된 내용을 저장하시겠습니까?")) return; // 변경된 내용을 저장하지 않겠다.
-    console.log(form);
     setLoading(true);
     await setDoc(doc(db, `users/${uid}`), form);
     setLoading(false);
+    alert("저장이 완료되었습니다!");
   };
 
   const callAPI = async () => {

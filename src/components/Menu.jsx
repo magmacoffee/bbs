@@ -73,16 +73,23 @@ const Menu = () => {
       <Routes>
         <Route path="/" element={<About />} />
         <Route path="/books" element={<Books />} />
-        <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/locals" element={<Locals />} />
-        <Route path="/favorite" element={<Favorite />} />
         <Route path="/join" element={<Join />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/bbs" element={<ListPage />} />
         <Route path="/bbs/insert" element={<InsertPage />} />
         <Route path="/bbs/read/:id" element={<ReadPage />} />
-        <Route path="/bbs/update/:id" element={<UpdatePage />} />
+
+        {sessionStorage.getItem("email") ? (
+          <>
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/favorite" element={<Favorite />} />
+            <Route path="/bbs/update/:id" element={<UpdatePage />} />
+          </>
+        ) : (
+          <Route path="*" element={<Login />} />
+        )}
       </Routes>
     </>
   );

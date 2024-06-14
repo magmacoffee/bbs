@@ -24,13 +24,13 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (email === "" || pass === "") {
-      alert("이메일 또는 비밀번호를 입력하세요!");
+      alert("이메일 또는 비밀번호를가 입력되지 않았습니다.");
     } else {
       //로그인 체크
       setLoading(true);
       signInWithEmailAndPassword(auth, email, pass)
         .then((success) => {
-          alert("로그인 성공");
+          alert("환영합니다!");
           setLoading(false);
           sessionStorage.setItem("email", email);
           sessionStorage.setItem("uid", success.user.uid);

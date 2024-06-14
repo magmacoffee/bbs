@@ -29,7 +29,7 @@ const Join = () => {
       setLoading(true);
       createUserWithEmailAndPassword(auth, email, pass)
         .then((success) => {
-          alert("이메일 가입 성공");
+          alert("가입을 완료하였습니다.");
           setLoading(false);
           navi("/login");
         })

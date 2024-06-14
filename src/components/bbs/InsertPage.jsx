@@ -29,13 +29,13 @@ const InsertPage = () => {
     };
     // console.log(data);
     await addDoc(collection(db, "posts"), data);
-    // alert("게시글 등록 완료");
+    alert("등록이 완료되었습니다.");
     window.location.href = "/bbs";
   };
   return (
     <Row className="my-5 justify-content-center">
       <Col xs={12} md={10} lg={8}>
-        <h1>글쓰기</h1>
+        <h1>게시글 등록</h1>
         <div className="mt-5">
           <Form.Control
             name="title"

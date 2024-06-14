@@ -12,6 +12,7 @@ import Pagination from "react-js-pagination";
 import "../Paging.css";
 
 const ListPage = () => {
+  const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
   const [count, setCount] = useState(0);
@@ -22,6 +23,7 @@ const ListPage = () => {
   const [posts, setPosts] = useState([]);
 
   const callAPI = () => {
+    setLoading(true);
     const q = query(collection(db, "posts"), orderBy("date", "desc"));
     onSnapshot(q, (snapshot) => {
       let rows = [];
@@ -43,17 +45,23 @@ const ListPage = () => {
       console.log(data);
       setCount(no);
       setPosts(data);
+      setLoading(false);
     });
   };
 
   useEffect(() => {
     callAPI();
+  }, []);
+
+  useEffect(() => {
+    callAPI();
   }, [page]);
 
+  if (loading) return <h1 className="my-5">로딩중입니다...</h1>;
   return (
     <Row className="my-5 justify-content-center">
       <Col xs={12} md={10} lg={8}>
-        <h1 className="mb-5">게시글목록</h1>
+        <h1 className="mb-5">게시글 목록</h1>
         {uid && (
           <div className="text-end">
             <a href="/bbs/insert">
